@@ -1,21 +1,30 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const navLinks = [
-  { href: '#inicio', label: 'Inicio' },
-  { href: '#quienes-somos', label: 'Quiénes Somos' },
-  { href: '#servicios', label: 'Servicios' },
-  { href: '#porque-elegirnos', label: '¿Por Qué Elegirnos?' },
-  { href: '#contacto', label: 'Contacto' },
-];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { language, changeLanguage, t } = useLanguage();
 
   const logoUrl = "https://storage.googleapis.com/hostinger-horizons-assets-prod/ad28893a-6404-474e-829f-ec3934cba166/96818857aa3c8a1dc5cd8d22330d2457.png";
+
+  const navLinks = [
+    { href: '#inicio', labelKey: 'navbar.home' },
+    { href: '#quienes-somos', labelKey: 'navbar.about' },
+    { href: '#servicios', labelKey: 'navbar.services' },
+    { href: '#porque-elegirnos', labelKey: 'navbar.whyUs' },
+    { href: '#contacto', labelKey: 'navbar.contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +33,8 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const linkColor = isScrolled || isOpen ? 'text-gray-700 hover:text-hmr-orange' : 'text-white hover:text-hmr-yellow';
 
   return (
     <motion.nav 
@@ -39,18 +50,50 @@ const Navbar = () => {
               <img className="h-10 w-auto" src={logoUrl} alt="HMR Agencia Logo" />
             </a>
           </div>
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <a
-                key={link.label}
+                key={link.labelKey}
                 href={link.href}
-                className={`font-medium ${isScrolled || isOpen ? 'text-gray-700 hover:text-hmr-orange' : 'text-white hover:text-hmr-yellow'} transition-colors`}
+                className={`font-medium ${linkColor} transition-colors`}
               >
-                {link.label}
+                {t(link.labelKey)}
               </a>
             ))}
+             <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className={`px-2 py-1 ${linkColor} focus:outline-none`}>
+                  <Globe size={20} className="mr-1" /> 
+                  {language.toUpperCase()}
+                  <ChevronDown size={16} className="ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-white shadow-lg rounded-md border-gray-200">
+                <DropdownMenuItem onClick={() => changeLanguage('es')} className="text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  {t('navbar.spanish')} (ES)
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => changeLanguage('en')} className="text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  {t('navbar.english')} (EN)
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className={`px-2 py-1 mr-2 ${linkColor} focus:outline-none`}>
+                    <Globe size={20} />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="bg-white shadow-lg rounded-md border-gray-200">
+                  <DropdownMenuItem onClick={() => {changeLanguage('es'); setIsOpen(false);}} className="text-gray-700 hover:bg-gray-100 cursor-pointer">
+                    {t('navbar.spanish')} (ES)
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => {changeLanguage('en'); setIsOpen(false);}} className="text-gray-700 hover:bg-gray-100 cursor-pointer">
+                    {t('navbar.english')} (EN)
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`focus:outline-none ${isScrolled || isOpen ? 'text-gray-700' : 'text-white'}`}
@@ -71,12 +114,12 @@ const Navbar = () => {
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
             {navLinks.map((link) => (
               <a
-                key={link.label}
+                key={link.labelKey}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className="text-gray-700 hover:text-hmr-orange block px-3 py-2 rounded-md text-base font-medium transition-colors"
               >
-                {link.label}
+                {t(link.labelKey)}
               </a>
             ))}
           </div>

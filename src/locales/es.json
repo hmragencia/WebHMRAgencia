@@ -1,0 +1,96 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "about": "Quiénes Somos",
+    "services": "Servicios",
+    "whyUs": "¿Por Qué Elegirnos?",
+    "contact": "Contacto",
+    "language": "Idioma",
+    "spanish": "Español",
+    "english": "Inglés"
+  },
+  "hero": {
+    "title1": "Transformamos Ideas en",
+    "title2": "Experiencias Inolvidables",
+    "subtitle": "En HMR Agencia, combinamos creatividad, estrategia y tecnología para impulsar tu presente.",
+    "buttonServices": "Descubre Nuestros Servicios",
+    "buttonContact": "Hablemos de tu Proyecto"
+  },
+  "institutional": {
+    "title": "Somos HMR Agencia",
+    "text": "Una agencia apasionada por la creatividad y la innovación. Nos dedicamos a construir puentes entre marcas y sus audiencias a través de soluciones estratégicas y experiencias impactantes. Nuestro enfoque se centra en entender profundamente tus objetivos para ofrecer resultados que no solo cumplan, sino que superen tus expectativas. Creemos en el poder de las ideas audaces y la ejecución impecable.",
+    "button": "Hablemos de tu proyecto"
+  },
+  "services": {
+    "title": "Nuestras Áreas de Servicio",
+    "subtitle": "Soluciones integrales para llevar tu marca al siguiente nivel.",
+    "items": [
+      { "name": "Eventos Sociales", "description": "Creamos momentos inolvidables con planificación y ejecución impecable para tus eventos." },
+      { "name": "Creatividad", "description": "Ideas innovadoras que capturan la esencia de tu marca y conectan con tu audiencia." },
+      { "name": "Cubrimiento y Logística", "description": "Soluciones logísticas integrales para asegurar el éxito de tus proyectos y eventos." },
+      { "name": "Digital", "description": "Estrategias digitales efectivas para potenciar tu presencia online y alcanzar tus metas." },
+      { "name": "Branding", "description": "Construimos marcas sólidas y memorables que reflejan tu identidad y valores." },
+      { "name": "Tecnología", "description": "Implementamos soluciones tecnológicas avanzadas para optimizar procesos y experiencias." }
+    ]
+  },
+  "whyChooseUs": {
+    "title": "¿Por Qué Elegirnos?",
+    "subtitle": "Comprometidos con tu éxito, ofrecemos valor diferencial en cada proyecto.",
+    "reasons": [
+      { "title": "Equipo Experto", "description": "Profesionales apasionados y con amplia experiencia en cada área de servicio." },
+      { "title": "Resultados Comprobados", "description": "Estrategias efectivas que generan impacto medible y superan tus objetivos." },
+      { "title": "Comunicación Transparente", "description": "Mantenemos un diálogo abierto y constante, involucrándote en cada etapa." },
+      { "title": "Soluciones a Medida", "description": "Adaptamos nuestros servicios a tus necesidades específicas para garantizar el éxito." }
+    ]
+  },
+  "callToAction": {
+    "title": "¿Tienes un Proyecto en Mente?",
+    "text": "Nos encantaría conocerlo. Desde la conceptualización hasta la ejecución, estamos listos para convertir tu visión en realidad.",
+    "button": "Solicitar Propuesta",
+    "cards": [
+      { "title": "Resultados Comprobados", "description": "Nuestro portafolio habla por sí mismo. Entregamos proyectos que no solo cumplen, sino que superan las expectativas." },
+      { "title": "Innovación Constante", "description": "Nos mantenemos a la vanguardia de las últimas tendencias y tecnologías para ofrecerte soluciones creativas y efectivas." }
+    ]
+  },
+  "contactForm": {
+    "title": "Contáctanos",
+    "subtitle": "¿Listo para empezar tu próximo proyecto? Envíanos un mensaje.",
+    "nameLabel": "Nombre Completo",
+    "nameRequired": "El nombre es obligatorio.",
+    "emailLabel": "Correo Electrónico",
+    "emailRequired": "El correo electrónico es obligatorio.",
+    "emailInvalid": "El correo electrónico no es válido.",
+    "phoneLabel": "Celular (Opcional)",
+    "whatsappLabel": "¿Podemos contactarte por WhatsApp?",
+    "companyLabel": "Empresa (Opcional)",
+    "messageLabel": "Mensaje (Opcional)",
+    "serviceLabel": "Servicio Requerido (Puedes elegir varios)",
+    "serviceOptions": [
+      { "id": "eventos", "label": "Eventos Sociales" },
+      { "id": "creatividad", "label": "Creatividad" },
+      { "id": "logistica", "label": "Logística" },
+      { "id": "cubrimiento", "label": "Cubrimiento Digital" },
+      { "id": "branding", "label": "Branding" },
+      { "id": "tecnologia", "label": "Tecnología" },
+      { "id": "publicidad", "label": "Publicidad" },
+      { "id": "impresiones", "label": "Impresiones" },
+      { "id": "otro", "label": "Otro" }
+    ],
+    "submitButton": "Enviar Mensaje",
+    "submittingButton": "Enviando...",
+    "toastErrorTitle": "Error en el Formulario",
+    "toastErrorDescription": "Por favor, corrige los campos marcados.",
+    "toastSuccessTitle": "¡Formulario Enviado!",
+    "toastSuccessDescription": "Gracias por contactarnos. Nos pondremos en contacto contigo pronto.",
+    "toastSubmitErrorTitle": "Error al Enviar",
+    "toastSubmitErrorDescription": "Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo. Detalles: "
+  },
+  "footer": {
+    "tagline": "Transformando ideas en experiencias inolvidables.",
+    "quickLinks": "Enlaces Rápidos",
+    "contact": "Contacto",
+    "rights": "Todos los derechos reservados.",
+    "designedWith": "Diseñado con",
+    "andCreativity": "y creatividad."
+  }
+}

@@ -1,16 +1,16 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { CalendarDays, Lightbulb, Truck, Computer, Palette, Cpu } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
-const services = [
-  { name: 'Eventos Sociales', description: 'Creamos momentos inolvidables con planificación y ejecución impecable para tus eventos.', icon: <CalendarDays className="h-10 w-10 text-hmr-orange mb-4" /> },
-  { name: 'Creatividad', description: 'Ideas innovadoras que capturan la esencia de tu marca y conectan con tu audiencia.', icon: <Lightbulb className="h-10 w-10 text-hmr-yellow mb-4" /> },
-  { name: 'Cubrimiento y Logística', description: 'Soluciones logísticas integrales para asegurar el éxito de tus proyectos y eventos.', icon: <Truck className="h-10 w-10 text-hmr-green mb-4" /> },
-  { name: 'Digital', description: 'Estrategias digitales efectivas para potenciar tu presencia online y alcanzar tus metas.', icon: <Computer className="h-10 w-10 text-hmr-blue-light mb-4" /> },
-  { name: 'Branding', description: 'Construimos marcas sólidas y memorables que reflejan tu identidad y valores.', icon: <Palette className="h-10 w-10 text-hmr-purple mb-4" /> },
-  { name: 'Tecnología', description: 'Implementamos soluciones tecnológicas avanzadas para optimizar procesos y experiencias.', icon: <Cpu className="h-10 w-10 text-hmr-red mb-4" /> },
+const serviceIcons = [
+  <CalendarDays className="h-10 w-10 text-hmr-orange mb-4" />,
+  <Lightbulb className="h-10 w-10 text-hmr-yellow mb-4" />,
+  <Truck className="h-10 w-10 text-hmr-green mb-4" />,
+  <Computer className="h-10 w-10 text-hmr-blue-light mb-4" />,
+  <Palette className="h-10 w-10 text-hmr-purple mb-4" />,
+  <Cpu className="h-10 w-10 text-hmr-red mb-4" />,
 ];
 
 const cardVariants = {
@@ -26,6 +26,9 @@ const cardVariants = {
 };
 
 const ServicesSection = () => {
+  const { t } = useLanguage();
+  const services = t('services.items');
+
   return (
     <section id="servicios" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,8 +39,8 @@ const ServicesSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-hmr-blue-dark">Nuestras Áreas de Servicio</h2>
-          <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Soluciones integrales para llevar tu marca al siguiente nivel.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-hmr-blue-dark">{t('services.title')}</h2>
+          <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">{t('services.subtitle')}</p>
         </motion.div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
@@ -52,7 +55,7 @@ const ServicesSection = () => {
             >
               <Card className="h-full flex flex-col text-center hover:shadow-xl transition-shadow duration-300 border-gray-200 rounded-xl overflow-hidden">
                 <CardHeader className="items-center pt-8">
-                  {service.icon}
+                  {serviceIcons[index % serviceIcons.length]}
                   <CardTitle className="text-2xl text-hmr-blue-dark">{service.name}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">

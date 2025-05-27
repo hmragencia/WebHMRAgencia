@@ -7,21 +7,13 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/lib/supabaseClient';
-
-const serviceOptions = [
-  { id: 'eventos', label: 'Eventos Sociales' },
-  { id: 'creatividad', label: 'Creatividad' },
-  { id: 'logistica', label: 'Logística' },
-  { id: 'cubrimiento', label: 'Cubrimiento Digital' },
-  { id: 'branding', label: 'Branding' },
-  { id: 'tecnologia', label: 'Tecnología' },
-  { id: 'publicidad', label: 'Publicidad' },
-  { id: 'impresiones', label: 'Impresiones' },
-  { id: 'otro', label: 'Otro' },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 const ContactFormSection = () => {
+  const { t } = useLanguage();
   const { toast } = useToast();
+  const serviceOptions = t('contactForm.serviceOptions');
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -51,11 +43,11 @@ const ContactFormSection = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'El nombre es obligatorio.';
+    if (!formData.name.trim()) newErrors.name = t('contactForm.nameRequired');
     if (!formData.email.trim()) {
-      newErrors.email = 'El correo electrónico es obligatorio.';
+      newErrors.email = t('contactForm.emailRequired');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'El correo electrónico no es válido.';
+      newErrors.email = t('contactForm.emailInvalid');
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -65,8 +57,8 @@ const ContactFormSection = () => {
     e.preventDefault();
     if (!validateForm()) {
       toast({
-        title: "Error en el Formulario",
-        description: "Por favor, corrige los campos marcados.",
+        title: t('contactForm.toastErrorTitle'),
+        description: t('contactForm.toastErrorDescription'),
         variant: "destructive",
         duration: 5000,
       });
@@ -93,8 +85,8 @@ const ContactFormSection = () => {
       if (error) throw error;
 
       toast({
-        title: "¡Formulario Enviado!",
-        description: "Gracias por contactarnos. Nos pondremos en contacto contigo pronto.",
+        title: t('contactForm.toastSuccessTitle'),
+        description: t('contactForm.toastSuccessDescription'),
         variant: "default",
         duration: 5000,
       });
@@ -105,8 +97,8 @@ const ContactFormSection = () => {
     } catch (error) {
       console.error('Error submitting to Supabase:', error);
       toast({
-        title: "Error al Enviar",
-        description: "Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo. Detalles: " + error.message,
+        title: t('contactForm.toastSubmitErrorTitle'),
+        description: `${t('contactForm.toastSubmitErrorDescription')} ${error.message}`,
         variant: "destructive",
         duration: 7000,
       });
@@ -125,8 +117,8 @@ const ContactFormSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-hmr-blue-dark">Contáctanos</h2>
-          <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">¿Listo para empezar tu próximo proyecto? Envíanos un mensaje.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-hmr-blue-dark">{t('contactForm.title')}</h2>
+          <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">{t('contactForm.subtitle')}</p>
         </motion.div>
         
         <motion.form 
@@ -138,33 +130,33 @@ const ContactFormSection = () => {
           transition={{ duration: 0.6 }}
         >
           <div>
-            <Label htmlFor="name" className="text-gray-700 font-medium">Nombre Completo <span className="text-hmr-red">*</span></Label>
+            <Label htmlFor="name" className="text-gray-700 font-medium">{t('contactForm.nameLabel')} <span className="text-hmr-red">*</span></Label>
             <Input type="text" name="name" id="name" value={formData.name} onChange={handleChange} className={`mt-1 ${errors.name ? 'border-red-500' : 'border-gray-300'}`} disabled={isSubmitting} />
             {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name}</p>}
           </div>
           <div>
-            <Label htmlFor="email" className="text-gray-700 font-medium">Correo Electrónico <span className="text-hmr-red">*</span></Label>
+            <Label htmlFor="email" className="text-gray-700 font-medium">{t('contactForm.emailLabel')} <span className="text-hmr-red">*</span></Label>
             <Input type="email" name="email" id="email" value={formData.email} onChange={handleChange} className={`mt-1 ${errors.email ? 'border-red-500' : 'border-gray-300'}`} disabled={isSubmitting} />
             {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email}</p>}
           </div>
           <div>
-            <Label htmlFor="phone" className="text-gray-700 font-medium">Celular (Opcional)</Label>
+            <Label htmlFor="phone" className="text-gray-700 font-medium">{t('contactForm.phoneLabel')}</Label>
             <Input type="tel" name="phone" id="phone" value={formData.phone} onChange={handleChange} className="mt-1 border-gray-300" disabled={isSubmitting} />
             <div className="flex items-center mt-2 space-x-2">
               <Checkbox id="whatsappContact" name="whatsappContact" checked={formData.whatsappContact} onCheckedChange={(checked) => setFormData(prev => ({ ...prev, whatsappContact: checked }))} disabled={isSubmitting} />
-              <Label htmlFor="whatsappContact" className="text-sm text-gray-600 font-normal">¿Podemos contactarte por WhatsApp?</Label>
+              <Label htmlFor="whatsappContact" className="text-sm text-gray-600 font-normal">{t('contactForm.whatsappLabel')}</Label>
             </div>
           </div>
           <div>
-            <Label htmlFor="company" className="text-gray-700 font-medium">Empresa (Opcional)</Label>
+            <Label htmlFor="company" className="text-gray-700 font-medium">{t('contactForm.companyLabel')}</Label>
             <Input type="text" name="company" id="company" value={formData.company} onChange={handleChange} className="mt-1 border-gray-300" disabled={isSubmitting} />
           </div>
           <div>
-            <Label htmlFor="message" className="text-gray-700 font-medium">Mensaje (Opcional)</Label>
+            <Label htmlFor="message" className="text-gray-700 font-medium">{t('contactForm.messageLabel')}</Label>
             <Textarea name="message" id="message" value={formData.message} onChange={handleChange} className="mt-1 border-gray-300" rows={4} disabled={isSubmitting} />
           </div>
           <div>
-            <Label className="text-gray-700 font-medium">Servicio Requerido (Puedes elegir varios)</Label>
+            <Label className="text-gray-700 font-medium">{t('contactForm.serviceLabel')}</Label>
             <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2">
               {serviceOptions.map(service => (
                 <div key={service.id} className="flex items-center space-x-2">
@@ -182,7 +174,7 @@ const ContactFormSection = () => {
             </div>
           </div>
           <Button type="submit" size="lg" className="w-full bg-gradient-to-r from-hmr-orange to-yellow-400 text-white hover:opacity-90 transition-opacity duration-300 py-3 text-lg" disabled={isSubmitting}>
-            {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+            {isSubmitting ? t('contactForm.submittingButton') : t('contactForm.submitButton')}
           </Button>
         </motion.form>
       </div>

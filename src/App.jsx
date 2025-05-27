@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/sections/Navbar';
@@ -10,6 +9,7 @@ import CallToActionSection from '@/components/sections/CallToActionSection';
 import ContactFormSection from '@/components/sections/ContactFormSection';
 import Footer from '@/components/sections/Footer';
 import { Toaster } from '@/components/ui/toaster';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 function App() {
   const pageVariants = {
@@ -25,26 +25,28 @@ function App() {
   };
 
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      transition={pageTransition}
-      className="font-sans antialiased"
-    >
-      <Navbar />
-      <main>
-        <HeroSection />
-        <InstitutionalSection />
-        <ServicesSection />
-        <WhyChooseUsSection />
-        <CallToActionSection />
-        <ContactFormSection />
-      </main>
-      <Footer />
-      <Toaster />
-    </motion.div>
+    <LanguageProvider>
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        transition={pageTransition}
+        className="font-sans antialiased"
+      >
+        <Navbar />
+        <main>
+          <HeroSection />
+          <InstitutionalSection />
+          <ServicesSection />
+          <WhyChooseUsSection />
+          <CallToActionSection />
+          <ContactFormSection />
+        </main>
+        <Footer />
+        <Toaster />
+      </motion.div>
+    </LanguageProvider>
   );
 }
 

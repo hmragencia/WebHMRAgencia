@@ -1,16 +1,19 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { CheckCircle, Zap } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
-const additionalCards = [
-  { title: 'Resultados Comprobados', description: 'Nuestro portafolio habla por sí mismo. Entregamos proyectos que no solo cumplen, sino que superan las expectativas.', icon: <CheckCircle className="h-8 w-8 text-hmr-green mr-3" /> },
-  { title: 'Innovación Constante', description: 'Nos mantenemos a la vanguardia de las últimas tendencias y tecnologías para ofrecerte soluciones creativas y efectivas.', icon: <Zap className="h-8 w-8 text-hmr-purple mr-3" /> },
+const additionalCardIcons = [
+  <CheckCircle className="h-8 w-8 text-hmr-green mr-3" />,
+  <Zap className="h-8 w-8 text-hmr-purple mr-3" />,
 ];
 
 const CallToActionSection = () => {
+  const { t } = useLanguage();
+  const additionalCards = t('callToAction.cards');
+
   const scrollToContact = () => {
     document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -24,16 +27,16 @@ const CallToActionSection = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">¿Tienes un Proyecto en Mente?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('callToAction.title')}</h2>
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-            Nos encantaría conocerlo. Desde la conceptualización hasta la ejecución, estamos listos para convertir tu visión en realidad.
+            {t('callToAction.text')}
           </p>
           <Button 
             size="lg" 
             className="bg-hmr-orange text-white hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 px-10 py-3 text-lg mb-12"
             onClick={scrollToContact}
           >
-            Solicitar Propuesta
+            {t('callToAction.button')}
           </Button>
         </motion.div>
 
@@ -48,7 +51,7 @@ const CallToActionSection = () => {
             >
               <Card className="bg-white/10 backdrop-blur-sm text-white border-white/20 h-full">
                 <CardHeader className="flex flex-row items-center">
-                  {card.icon}
+                  {additionalCardIcons[index % additionalCardIcons.length]}
                   <CardTitle className="text-xl">{card.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
